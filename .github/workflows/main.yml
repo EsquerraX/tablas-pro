@@ -24,8 +24,10 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Instalar deps
-        run: npm install
+      - name: Instalar deps + TypeScript
+        run: |
+          npm install
+          npm install -D typescript
 
       - name: Crear Android + Iconos PRO
         run: |
@@ -33,7 +35,6 @@ jobs:
           echo "Copiando iconos PRO..."
           cp -r android-icon/* android/app/src/main/res/ || echo "no android-icon"
           npx cap sync android
-          ls -lh android/app/src/main/res/mipmap-xxxhdpi/
 
       - name: Permisos gradle
         run: chmod +x android/gradlew
