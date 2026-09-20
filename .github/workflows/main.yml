@@ -24,10 +24,14 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Instalar deps + TypeScript
+      - name: Fix capacitor config (TS -> JSON para Node 24)
         run: |
-          npm install
-          npm install -D typescript
+          rm -f capacitor.config.ts
+          echo '{ "appId": "com.tablaspro.torneo", "appName": "Tablas Pro Torneo", "webDir": "www" }' > capacitor.config.json
+          cat capacitor.config.json
+
+      - name: Instalar deps
+        run: npm install
 
       - name: Crear Android + Iconos PRO
         run: |
