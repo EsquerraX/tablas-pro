@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Descargar código
+      - name: Descargar codigo
         uses: actions/checkout@v4
 
       - name: Node 20
@@ -32,7 +32,7 @@ jobs:
         run: |
           npx cap add android
           echo "Copiando iconos PRO..."
-          cp -r android-icon/* android/app/src/main/res/ || echo "no android-icon, usando default"
+          cp -r android-icon/* android/app/src/main/res/ || echo "no android-icon"
           npx cap sync android
           ls -lh android/app/src/main/res/mipmap-xxxhdpi/
 
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build Debug APK
         working-directory: android
-        run:./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Subir APK
         uses: actions/upload-artifact@v4
